@@ -263,23 +263,26 @@ question = st.text_area(
     "先把你想问的问题写下来",
     placeholder="例如：我和他还有可能吗？/ 我最近的实习方向怎么样？/ 今天我需要注意什么？",
     height=120,
+    key="question_input_primary",
 )
 
 topic = st.radio(
     "你想问哪一类？",
     ["感情", "学业 / 事业", "今日指引", "随机"],
     horizontal=True,
+    key="topic_radio_primary",
 )
 
 spread = st.radio(
     "选择牌阵",
     ["一张牌", "三张牌"],
     horizontal=True,
+    key="spread_radio_primary",
 )
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-draw_clicked = st.button("❄️ 等一片雪花落下", use_container_width=True)
+draw_clicked = st.button("❄️ 等一片雪花落下", use_container_width=True, key="draw_button_primary")
 
 if draw_clicked:
     if not question.strip():
@@ -708,19 +711,22 @@ st.markdown('<div class="input-shell">', unsafe_allow_html=True)
 question = st.text_area(
     "先把你想问的问题写下来",
     placeholder="例如：我和他还有可能吗？/ 我最近的实习方向怎么样？/ 今天我需要注意什么？",
-    height=128
+    height=128,
+    key="question_input"
 )
 
 topic = st.radio(
     "你想问哪一类？",
     ["感情", "学业 / 事业", "今日指引", "随机"],
-    horizontal=True
+    horizontal=True,
+    key="topic_radio"
 )
 
 spread = st.radio(
     "选择牌阵",
     ["一张牌", "三张牌"],
-    horizontal=True
+    horizontal=True,
+    key="spread_radio"
 )
 
 st.markdown('</div>', unsafe_allow_html=True)
@@ -730,7 +736,7 @@ st.divider()
 # ---------- 抽牌 ----------
 button_col_left, button_col_mid, button_col_right = st.columns([1, 4, 1])
 with button_col_mid:
-    draw_clicked = st.button("❄️ 等一片雪花落下", use_container_width=True)
+    draw_clicked = st.button("❄️ 等一片雪花落下", use_container_width=True, key="draw_button")
 
 if draw_clicked:
     if not question.strip():
