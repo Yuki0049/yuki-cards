@@ -12,7 +12,54 @@ st.set_page_config(page_title="Yuki Cards", page_icon="❄️", layout="centered
 st.markdown(
     """
     <style>
-    .stApp { background: linear-gradient(180deg, #f8fcff 0%, #eef5ff 60%, #ecebff 100%); color: #1f2a44; }
+    .stApp {
+        background: linear-gradient(180deg, #f8fcff 0%, #edf5ff 55%, #f7f2ff 100%);
+        color: #1f2a44;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    p, span, div, label {
+        color: #1f2a44 !important;
+    }
+
+    .stMarkdown, .stMarkdown p {
+        color: #1f2a44 !important;
+    }
+
+    .stCaptionContainer, .stCaptionContainer p {
+        color: #52657f !important;
+    }
+
+    .stRadio label,
+    .stRadio div,
+    .stRadio span {
+        color: #1f2a44 !important;
+        opacity: 1 !important;
+    }
+
+    textarea {
+        background-color: rgba(255, 255, 255, 0.96) !important;
+        color: #1f2a44 !important;
+        border-radius: 16px !important;
+        border: 1px solid rgba(120, 155, 200, 0.45) !important;
+    }
+
+    textarea::placeholder {
+        color: #6f83a3 !important;
+        opacity: 1 !important;
+    }
+
+    .stButton > button {
+        color: #ffffff !important;
+        background: linear-gradient(90deg, #23466f 0%, #5b8def 100%) !important;
+        border-radius: 999px !important;
+        font-weight: 700 !important;
+    }
+
+    .stButton > button * {
+        color: #ffffff !important;
+    }
+
     .main .block-container { max-width: 520px; padding-top: 26px; padding-bottom: 28px; }
     .title { text-align: center; font-size: 40px; font-weight: 800; color: #22384f; margin-bottom: 6px; }
     .subtitle { text-align: center; font-size: 16px; color: #263552; margin-bottom: 16px; }
@@ -22,42 +69,6 @@ st.markdown(
     .result-name { font-size: 26px; font-weight: 800; color: #233b56; margin-bottom: 6px; }
     .result-keyword { font-size: 14px; color: #324766; margin-bottom: 8px; }
     .result-text { font-size: 15px; line-height: 1.8; color: #263552; }
-
-    .stMarkdown, .stMarkdown p, .stMarkdown div,
-    .stCaptionContainer, .stCaptionContainer p, .stCaptionContainer span,
-    label, .stRadio label, .stRadio div[role="radiogroup"] label {
-        color: #1f2a44 !important;
-    }
-
-    .stTextArea label, .stRadio label {
-        color: #1f2a44 !important;
-        font-weight: 600;
-    }
-
-    .stTextArea textarea,
-    .stTextInput input {
-        background: #fdfefe !important;
-        color: #1f2a44 !important;
-        border: 1px solid #c6d9ee !important;
-        border-radius: 10px !important;
-    }
-
-    .stTextArea textarea::placeholder,
-    .stTextInput input::placeholder {
-        color: #627998 !important;
-        opacity: 1 !important;
-    }
-
-    .stButton > button {
-        background: #2e4f77 !important;
-        color: #ffffff !important;
-        font-weight: 700;
-    }
-
-    .stButton > button p,
-    .stButton > button span {
-        color: #ffffff !important;
-    }
     </style>
     """,
     unsafe_allow_html=True,
