@@ -17,94 +17,78 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    :root {
-        --ink-900: #1f3045;
-        --ink-700: #314a67;
-        --ink-600: #476180;
-        --ice-100: #f8fcff;
-        --ice-200: #edf5ff;
-        --ice-300: #deebfa;
-    }
-
     .stApp {
-        position: relative;
         background:
-            radial-gradient(circle at 14% 10%, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0) 33%),
-            radial-gradient(circle at 84% 22%, rgba(235, 245, 255, 0.72) 0%, rgba(235, 245, 255, 0) 38%),
-            linear-gradient(180deg, #fbfdff 0%, #f1f7ff 45%, #e9f2ff 100%);
+            radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0) 38%),
+            linear-gradient(180deg, #fcfeff 0%, #eef5ff 55%, #ecebff 100%);
+        color: #2d4360;
     }
 
-    .stApp::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background-image:
-            radial-gradient(circle at 22% 28%, rgba(255, 255, 255, 0.58) 0 2px, transparent 3px),
-            radial-gradient(circle at 70% 38%, rgba(255, 255, 255, 0.42) 0 1.5px, transparent 2.5px),
-            radial-gradient(circle at 58% 76%, rgba(255, 255, 255, 0.5) 0 2px, transparent 3px);
-        opacity: 0.8;
+    [data-testid="stAppViewContainer"] {
+        background: transparent;
     }
 
     .main .block-container {
         max-width: 520px;
-        padding-top: 32px;
-        padding-bottom: 36px;
+        padding-top: 26px;
+        padding-bottom: 34px;
     }
 
     .title {
         text-align: center;
-        font-size: 42px;
+        font-size: 40px;
         font-weight: 800;
-        margin-bottom: 6px;
-        color: var(--ink-900);
+        margin-bottom: 4px;
+        color: #22354d;
     }
 
     .subtitle {
         text-align: center;
-        color: #607898;
+        color: #5c7392;
         font-size: 16px;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
 
     .soft-note {
         padding: 14px 16px;
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.52);
-        backdrop-filter: blur(9px);
-        border: 1px solid rgba(173, 200, 230, 0.46);
-        box-shadow: 0 8px 24px rgba(72, 104, 148, 0.10);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.74);
+        border: 1px solid rgba(177, 203, 232, 0.52);
+        box-shadow: 0 8px 22px rgba(76, 105, 148, 0.10);
         color: #34506d;
-        line-height: 1.8;
+        line-height: 1.75;
         margin-bottom: 16px;
         font-size: 14px;
     }
 
     .input-shell {
-        padding: 18px 16px 16px 16px;
-        border-radius: 22px;
-        background: rgba(255, 255, 255, 0.56);
-        border: 1px solid rgba(170, 198, 230, 0.5);
-        box-shadow: 0 14px 34px rgba(65, 96, 137, 0.13);
-        backdrop-filter: blur(11px);
-        margin-bottom: 14px;
+        padding: 18px 16px 14px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.68);
+        border: 1px solid rgba(171, 198, 228, 0.55);
+        box-shadow: 0 12px 30px rgba(67, 96, 138, 0.12);
+        margin-bottom: 12px;
     }
 
-    .form-label {
-        color: var(--ink-700);
-        font-size: 15px;
-        font-weight: 700;
-        margin: 10px 0 8px 2px;
-        letter-spacing: 0.2px;
+    .stMarkdown h2,
+    .stMarkdown h3,
+    .stMarkdown h4,
+    .stTextArea label,
+    .stRadio label,
+    .stCaption,
+    p,
+    span,
+    div {
+        color: #2d4360;
     }
 
     .stTextArea textarea {
         min-height: 128px;
-        color: var(--ink-900) !important;
+        color: #243a54 !important;
         background: rgba(255, 255, 255, 0.9) !important;
         border: 1px solid rgba(153, 184, 218, 0.56) !important;
-        border-radius: 14px !important;
-        line-height: 1.7 !important;
+        border-radius: 12px !important;
+        line-height: 1.65 !important;
     }
 
     .stTextArea textarea:focus {
@@ -118,70 +102,39 @@ st.markdown(
     }
 
     div[role="radiogroup"] {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 6px;
-    }
-
-    div[role="radiogroup"] > label {
-        margin: 0 !important;
-        padding: 8px 14px !important;
-        border-radius: 999px !important;
-        border: 1px solid rgba(162, 191, 223, 0.72) !important;
-        background: rgba(255, 255, 255, 0.74) !important;
-        color: var(--ink-700) !important;
-        font-weight: 600 !important;
-        transition: all 0.18s ease;
-    }
-
-    div[role="radiogroup"] > label:hover {
-        border-color: rgba(121, 160, 205, 0.85) !important;
-        background: rgba(241, 248, 255, 0.92) !important;
-    }
-
-    div[role="radiogroup"] > label > div:first-child {
-        display: none !important;
-    }
-
-    div[role="radiogroup"] > label[data-selected="true"] {
-        background: linear-gradient(145deg, #f2f8ff 0%, #e4f0ff 100%) !important;
-        border-color: rgba(109, 151, 198, 0.92) !important;
-        color: #243f5e !important;
-        box-shadow: 0 4px 12px rgba(111, 145, 186, 0.20);
+        color: #2d4360 !important;
     }
 
     .oracle-card {
-        padding: 20px 18px 18px 18px;
-        border-radius: 24px;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(245, 251, 255, 0.78) 100%);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 14px 30px rgba(70, 102, 140, 0.14);
-        border: 1px solid rgba(175, 203, 233, 0.66);
+        padding: 18px 16px 16px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(173, 200, 229, 0.55);
+        box-shadow: 0 10px 24px rgba(71, 102, 140, 0.12);
         margin-bottom: 16px;
     }
 
     .card-snow {
         text-align: center;
-        color: #7d96b3;
-        font-size: 13px;
+        color: #7b95b4;
+        font-size: 12px;
         letter-spacing: 2px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     .card-title {
         text-align: center;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 700;
-        color: #5e7595;
-        margin-bottom: 10px;
+        color: #5b7392;
+        margin-bottom: 8px;
     }
 
     .card-name {
         text-align: center;
-        font-size: 30px;
+        font-size: 28px;
         font-weight: 800;
-        color: #20364f;
+        color: #223a56;
         letter-spacing: 1px;
         margin-bottom: 8px;
     }
@@ -195,12 +148,12 @@ st.markdown(
 
     .reading-text {
         font-size: 15px;
-        line-height: 1.9;
-        color: #304c6d;
-        background: rgba(255, 255, 255, 0.66);
+        line-height: 1.85;
+        color: #2f4a69;
+        background: rgba(255, 255, 255, 0.75);
         border: 1px solid rgba(184, 210, 237, 0.58);
-        border-radius: 14px;
-        padding: 12px 13px;
+        border-radius: 12px;
+        padding: 11px 12px;
     }
 
     .stButton {
@@ -214,12 +167,12 @@ st.markdown(
         min-width: 260px;
         border-radius: 999px;
         border: none;
-        background: linear-gradient(135deg, #3f6287 0%, #557aa6 100%);
+        background: linear-gradient(135deg, #3f6186 0%, #6e8fb6 100%);
         color: #f7fbff;
         font-size: 17px;
         font-weight: 700;
         padding: 12px 20px;
-        box-shadow: 0 12px 26px rgba(58, 92, 132, 0.26);
+        box-shadow: 0 10px 24px rgba(58, 92, 132, 0.24);
         transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
@@ -406,12 +359,12 @@ def save_reading(question, topic, spread, result_text):
     data.to_csv(DATA_FILE, index=False, encoding="utf-8-sig")
 
 
-def render_card(title, keyword, text):
+def render_card(position, card_name, keyword, text):
     html = f"""
     <div class="oracle-card">
         <div class="card-snow">✦ ❄ ✦</div>
-        <div class="card-title">{title}</div>
-        <div class="card-name">「{title}」</div>
+        <div class="card-title">{position}</div>
+        <div class="card-name">「{card_name}」</div>
         <div class="card-keyword">{keyword}</div>
         <div class="reading-text">{text}</div>
     </div>
@@ -422,27 +375,21 @@ def render_card(title, keyword, text):
 # ---------- 输入区 ----------
 st.markdown('<div class="input-shell">', unsafe_allow_html=True)
 
-st.markdown('<div class="form-label">先把你想问的问题写下来</div>', unsafe_allow_html=True)
 question = st.text_area(
-    "问题",
+    "先把你想问的问题写下来",
     placeholder="例如：我和他还有可能吗？/ 我最近的实习方向怎么样？/ 今天我需要注意什么？",
-    label_visibility="collapsed",
     height=128
 )
 
-st.markdown('<div class="form-label">你想问哪一类？</div>', unsafe_allow_html=True)
 topic = st.radio(
-    "主题",
+    "你想问哪一类？",
     ["感情", "学业 / 事业", "今日指引", "随机"],
-    label_visibility="collapsed",
     horizontal=True
 )
 
-st.markdown('<div class="form-label">选择牌阵</div>', unsafe_allow_html=True)
 spread = st.radio(
-    "牌阵",
+    "选择牌阵",
     ["一张牌", "三张牌"],
-    label_visibility="collapsed",
     horizontal=True
 )
 
@@ -473,7 +420,8 @@ if draw_clicked:
             text = interpret_card(card, topic)
 
             render_card(
-                title=card["name"],
+                position="给你的雪牌",
+                card_name=card["name"],
                 keyword=card["keyword"],
                 text=text
             )
@@ -488,7 +436,8 @@ if draw_clicked:
                 text = interpret_card(card, topic)
 
                 render_card(
-                    title=f"{position}｜{card['name']}",
+                    position=position,
+                    card_name=card["name"],
                     keyword=card["keyword"],
                     text=text
                 )
