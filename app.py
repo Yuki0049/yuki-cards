@@ -85,6 +85,39 @@ st.markdown(
         font-size: 13px;
         margin-top: 8px;
     }
+
+    /* 表单区可读性优化：浅色背景上使用深蓝灰文字 */
+    .stMarkdown h2,
+    .stMarkdown h3,
+    .stMarkdown h4 {
+        color: #25384f;
+    }
+
+    .stTextArea label,
+    .stRadio label,
+    .stSelectbox label,
+    .stMultiSelect label {
+        color: #2c3f58 !important;
+        font-weight: 600;
+    }
+
+    .stRadio [role="radiogroup"] label {
+        color: #304760 !important;
+        font-weight: 500;
+    }
+
+    .stTextArea textarea,
+    .stTextInput input {
+        color: #25384f !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 1px solid rgba(150, 180, 220, 0.5) !important;
+    }
+
+    .stTextArea textarea::placeholder,
+    .stTextInput input::placeholder {
+        color: #5f7393 !important;
+        opacity: 1;
+    }
     </style>
     """,
     unsafe_allow_html=True
