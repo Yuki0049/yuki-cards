@@ -17,106 +17,232 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    :root {
+        --ink-900: #1f3045;
+        --ink-700: #314a67;
+        --ink-600: #476180;
+        --ice-100: #f8fcff;
+        --ice-200: #edf5ff;
+        --ice-300: #deebfa;
+    }
+
     .stApp {
+        position: relative;
         background:
-            radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 35%),
-            linear-gradient(180deg, #f8fcff 0%, #ecf4ff 48%, #e6edff 100%);
+            radial-gradient(circle at 14% 10%, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0) 33%),
+            radial-gradient(circle at 84% 22%, rgba(235, 245, 255, 0.72) 0%, rgba(235, 245, 255, 0) 38%),
+            linear-gradient(180deg, #fbfdff 0%, #f1f7ff 45%, #e9f2ff 100%);
+    }
+
+    .stApp::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+            radial-gradient(circle at 22% 28%, rgba(255, 255, 255, 0.58) 0 2px, transparent 3px),
+            radial-gradient(circle at 70% 38%, rgba(255, 255, 255, 0.42) 0 1.5px, transparent 2.5px),
+            radial-gradient(circle at 58% 76%, rgba(255, 255, 255, 0.5) 0 2px, transparent 3px);
+        opacity: 0.8;
+    }
+
+    .main .block-container {
+        max-width: 520px;
+        padding-top: 32px;
+        padding-bottom: 36px;
     }
 
     .title {
         text-align: center;
-        font-size: 44px;
+        font-size: 42px;
         font-weight: 800;
-        margin-bottom: 4px;
-        color: #243349;
+        margin-bottom: 6px;
+        color: var(--ink-900);
     }
 
     .subtitle {
         text-align: center;
-        color: #5f7393;
-        font-size: 17px;
-        margin-bottom: 28px;
-    }
-
-    .soft-note {
-        padding: 16px 18px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.58);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(166, 196, 234, 0.45);
-        box-shadow: 0 10px 30px rgba(80, 110, 160, 0.12);
-        color: #30445f;
-        line-height: 1.8;
-        margin-bottom: 22px;
-    }
-
-    .oracle-card {
-        padding: 24px;
-        border-radius: 26px;
-        background: rgba(255, 255, 255, 0.62);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 14px 34px rgba(70, 95, 145, 0.14);
-        border: 1px solid rgba(173, 205, 240, 0.5);
+        color: #607898;
+        font-size: 16px;
         margin-bottom: 20px;
     }
 
+    .soft-note {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.52);
+        backdrop-filter: blur(9px);
+        border: 1px solid rgba(173, 200, 230, 0.46);
+        box-shadow: 0 8px 24px rgba(72, 104, 148, 0.10);
+        color: #34506d;
+        line-height: 1.8;
+        margin-bottom: 16px;
+        font-size: 14px;
+    }
+
+    .input-shell {
+        padding: 18px 16px 16px 16px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.56);
+        border: 1px solid rgba(170, 198, 230, 0.5);
+        box-shadow: 0 14px 34px rgba(65, 96, 137, 0.13);
+        backdrop-filter: blur(11px);
+        margin-bottom: 14px;
+    }
+
+    .form-label {
+        color: var(--ink-700);
+        font-size: 15px;
+        font-weight: 700;
+        margin: 10px 0 8px 2px;
+        letter-spacing: 0.2px;
+    }
+
+    .stTextArea textarea {
+        min-height: 128px;
+        color: var(--ink-900) !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 1px solid rgba(153, 184, 218, 0.56) !important;
+        border-radius: 14px !important;
+        line-height: 1.7 !important;
+    }
+
+    .stTextArea textarea:focus {
+        border: 1px solid rgba(120, 160, 205, 0.78) !important;
+        box-shadow: 0 0 0 0.12rem rgba(146, 184, 225, 0.28) !important;
+    }
+
+    .stTextArea textarea::placeholder {
+        color: #647f9f !important;
+        opacity: 1 !important;
+    }
+
+    div[role="radiogroup"] {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
+
+    div[role="radiogroup"] > label {
+        margin: 0 !important;
+        padding: 8px 14px !important;
+        border-radius: 999px !important;
+        border: 1px solid rgba(162, 191, 223, 0.72) !important;
+        background: rgba(255, 255, 255, 0.74) !important;
+        color: var(--ink-700) !important;
+        font-weight: 600 !important;
+        transition: all 0.18s ease;
+    }
+
+    div[role="radiogroup"] > label:hover {
+        border-color: rgba(121, 160, 205, 0.85) !important;
+        background: rgba(241, 248, 255, 0.92) !important;
+    }
+
+    div[role="radiogroup"] > label > div:first-child {
+        display: none !important;
+    }
+
+    div[role="radiogroup"] > label[data-selected="true"] {
+        background: linear-gradient(145deg, #f2f8ff 0%, #e4f0ff 100%) !important;
+        border-color: rgba(109, 151, 198, 0.92) !important;
+        color: #243f5e !important;
+        box-shadow: 0 4px 12px rgba(111, 145, 186, 0.20);
+    }
+
+    .oracle-card {
+        padding: 20px 18px 18px 18px;
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(245, 251, 255, 0.78) 100%);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 14px 30px rgba(70, 102, 140, 0.14);
+        border: 1px solid rgba(175, 203, 233, 0.66);
+        margin-bottom: 16px;
+    }
+
+    .card-snow {
+        text-align: center;
+        color: #7d96b3;
+        font-size: 13px;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+
     .card-title {
-        font-size: 25px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: #5e7595;
+        margin-bottom: 10px;
+    }
+
+    .card-name {
+        text-align: center;
+        font-size: 30px;
         font-weight: 800;
-        color: #22354f;
-        margin-bottom: 4px;
+        color: #20364f;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
     }
 
     .card-keyword {
-        font-size: 15px;
-        color: #5e7699;
+        text-align: center;
+        font-size: 14px;
+        color: #5d789b;
         margin-bottom: 14px;
     }
 
     .reading-text {
-        font-size: 17px;
+        font-size: 15px;
         line-height: 1.9;
-        color: #2d4564;
+        color: #304c6d;
+        background: rgba(255, 255, 255, 0.66);
+        border: 1px solid rgba(184, 210, 237, 0.58);
+        border-radius: 14px;
+        padding: 12px 13px;
     }
 
-    .small-caption {
-        text-align: center;
-        color: #7f91ac;
-        font-size: 13px;
+    .stButton {
+        display: flex;
+        justify-content: center;
         margin-top: 8px;
+        margin-bottom: 4px;
     }
 
-    /* 表单区可读性优化：浅色背景上使用深蓝灰文字 */
-    .stMarkdown h2,
-    .stMarkdown h3,
-    .stMarkdown h4 {
-        color: #25384f;
+    .stButton > button {
+        min-width: 260px;
+        border-radius: 999px;
+        border: none;
+        background: linear-gradient(135deg, #3f6287 0%, #557aa6 100%);
+        color: #f7fbff;
+        font-size: 17px;
+        font-weight: 700;
+        padding: 12px 20px;
+        box-shadow: 0 12px 26px rgba(58, 92, 132, 0.26);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .stTextArea label,
-    .stRadio label,
-    .stSelectbox label,
-    .stMultiSelect label {
-        color: #2c3f58 !important;
-        font-weight: 600;
+    .stButton > button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 28px rgba(58, 92, 132, 0.30);
     }
 
-    .stRadio [role="radiogroup"] label {
-        color: #304760 !important;
-        font-weight: 500;
+    .stButton > button:focus,
+    .stButton > button:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(145, 181, 220, 0.35);
     }
 
-    .stTextArea textarea,
-    .stTextInput input {
-        color: #25384f !important;
-        background: rgba(255, 255, 255, 0.9) !important;
-        border: 1px solid rgba(150, 180, 220, 0.5) !important;
+    .stAlert {
+        border-radius: 14px;
     }
 
-    .stTextArea textarea::placeholder,
-    .stTextInput input::placeholder {
-        color: #5f7393 !important;
-        opacity: 1;
+    .record-caption {
+        text-align: center;
+        color: #6f85a2;
+        font-size: 13px;
+        margin-top: 4px;
     }
     </style>
     """,
@@ -283,7 +409,9 @@ def save_reading(question, topic, spread, result_text):
 def render_card(title, keyword, text):
     html = f"""
     <div class="oracle-card">
+        <div class="card-snow">✦ ❄ ✦</div>
         <div class="card-title">{title}</div>
+        <div class="card-name">「{title}」</div>
         <div class="card-keyword">{keyword}</div>
         <div class="reading-text">{text}</div>
     </div>
@@ -292,30 +420,42 @@ def render_card(title, keyword, text):
 
 
 # ---------- 输入区 ----------
-st.markdown("### 先把你想问的问题写下来")
+st.markdown('<div class="input-shell">', unsafe_allow_html=True)
 
+st.markdown('<div class="form-label">先把你想问的问题写下来</div>', unsafe_allow_html=True)
 question = st.text_area(
-    "不用写得很正式，像把心事轻轻放进雪里就行。",
+    "问题",
     placeholder="例如：我和他还有可能吗？/ 我最近的实习方向怎么样？/ 今天我需要注意什么？",
-    height=120
+    label_visibility="collapsed",
+    height=128
 )
 
+st.markdown('<div class="form-label">你想问哪一类？</div>', unsafe_allow_html=True)
 topic = st.radio(
-    "你想问哪一类？",
+    "主题",
     ["感情", "学业 / 事业", "今日指引", "随机"],
+    label_visibility="collapsed",
     horizontal=True
 )
 
+st.markdown('<div class="form-label">选择牌阵</div>', unsafe_allow_html=True)
 spread = st.radio(
-    "选择牌阵",
+    "牌阵",
     ["一张牌", "三张牌"],
+    label_visibility="collapsed",
     horizontal=True
 )
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.divider()
 
 # ---------- 抽牌 ----------
-if st.button("❄️ 等一片雪花落下"):
+button_col_left, button_col_mid, button_col_right = st.columns([1, 4, 1])
+with button_col_mid:
+    draw_clicked = st.button("❄️ 等一片雪花落下", use_container_width=True)
+
+if draw_clicked:
     if not question.strip():
         st.warning("先写一个你想问的问题。")
     else:
@@ -333,7 +473,7 @@ if st.button("❄️ 等一片雪花落下"):
             text = interpret_card(card, topic)
 
             render_card(
-                title=f"「{card['name']}」",
+                title=card["name"],
                 keyword=card["keyword"],
                 text=text
             )
@@ -342,13 +482,13 @@ if st.button("❄️ 等一片雪花落下"):
             result_parts.append(final_text)
 
         else:
-            positions = ["过去的影响", "现在的状态", "接下来的提醒"]
+            positions = ["过去的雪痕", "此刻的雪面", "即将落下的雪"]
 
             for position, card in zip(positions, selected_cards):
                 text = interpret_card(card, topic)
 
                 render_card(
-                    title=f"{position}： 「{card['name']}」",
+                    title=f"{position}｜{card['name']}",
                     keyword=card["keyword"],
                     text=text
                 )
@@ -376,15 +516,14 @@ if st.button("❄️ 等一片雪花落下"):
         full_result = "\n".join(result_parts) + "\n最后一句话：" + closing
         save_reading(question, topic, spread, full_result)
 
-        st.caption("已保存到本地占卜记录。")
+        st.markdown('<div class="record-caption">已保存到本地占卜记录。</div>', unsafe_allow_html=True)
 
 st.divider()
 
 # ---------- 历史记录 ----------
-st.markdown("### 占卜记录")
-
-try:
-    data = pd.read_csv(DATA_FILE)
-    st.dataframe(data[["日期", "主题", "牌阵", "问题"]])
-except FileNotFoundError:
-    st.info("还没有占卜记录。")
+with st.expander("查看占卜记录", expanded=False):
+    try:
+        data = pd.read_csv(DATA_FILE)
+        st.dataframe(data[["日期", "主题", "牌阵", "问题"]], use_container_width=True)
+    except FileNotFoundError:
+        st.info("还没有占卜记录。")
