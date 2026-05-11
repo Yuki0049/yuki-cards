@@ -161,13 +161,6 @@ if draw_clicked:
         save_reading(question, topic, spread, full_result)
         st.caption("已保存到本地占卜记录。")
 
-with st.expander("查看占卜记录", expanded=False):
-    try:
-        data = pd.read_csv(DATA_FILE)
-        st.dataframe(data[["日期", "主题", "牌阵", "问题"]], use_container_width=True)
-    except FileNotFoundError:
-        st.info("还没有占卜记录。")
-
 # Stop execution here to avoid duplicated legacy code blocks below.
 st.stop()
 
